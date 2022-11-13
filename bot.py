@@ -7,21 +7,34 @@ import math
 import time
 from pyrogram import Client, filters
 from helper_funcs.helpers import humanbytes, convert
+from pyrogram.types import InlineKeyboardMarkup,InlineKeyboardButton
 
 
-TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "")
+TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "5475320054:AAGnT6eMBInj7v5scpjfw1Sw9jF_rwcERj8")
 
-APP_ID = int(os.environ.get("APP_ID", ""))
+APP_ID = int(os.environ.get("APP_ID", "9411723"))
 
-API_HASH = os.environ.get("API_HASH", "")
+API_HASH = os.environ.get("API_HASH", "30fa091455c0548d77dc254f0bb705b0")
+
+
 
 
 app = Client("mdisk", bot_token=TG_BOT_TOKEN, api_hash=API_HASH, api_id=APP_ID)
 
+ 
+
 
 @app.on_message(filters.command(['start']))
 async def start(client, message):
-    await message.reply_text(text=f"Hello 👋\n\nSend me MDisk links to convert to Direct Download Link", reply_to_message_id=message.message_id)
+   await message.reply_photo(
+            photo="https://telegra.ph/file/29d3b17cdb209845ce4ef.jpg",
+            caption="**ʜᴇʟʟᴏ...⚡\nɪ ᴀᴍ ᴍᴅɪsᴋ ʙʏᴘᴀssᴇʀ ʙᴏᴛ\n\n>> ɪ ᴄᴀɴ ʙʏᴘᴀss ᴀɴʏ ᴍᴅɪsᴋ ʟɪɴᴋ ᴛᴏ ᴅɪʀᴇᴄᴛ ʟɪɴᴋ.\n\n#ɴᴏᴛᴇ sᴇɴᴅ ʟɪɴᴋ ᴏɴᴇ ʙʏ ᴏɴᴇ \n\n ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ @redxtgbots**",reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("🌐 ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇs", url="https://t.me/redxtgbots")]]), reply_to_message_id=message.message_id)
+
+@app.on_message(filters.command(['help']))
+async def help(client, message):
+    await message.reply_text(text=f"ʜᴇʏ,\n\nғᴏʟʟᴏᴡ ᴛʜᴇsᴇ sᴛᴇᴘs:  -\n\nᴊᴜsᴛ sᴇɴᴅ ᴍᴇ 𝟷 ᴍᴅɪsᴋ ʟɪɴᴋ ᴀᴛ ᴀ ᴛɪᴍᴇ ᴀɴᴅ sᴇᴇ ᴍᴀɢɪᴄ ✨\n\nᴍᴀᴅᴇ ʙʏ @AmanReDX", reply_to_message_id=message.message_id)
+
+
 
 
 @app.on_message(filters.private & filters.text)
@@ -58,8 +71,9 @@ async def link_extract(bot, message):
     ht = resp['height']
     wt = resp['width']
     download = resp['download']
+    source = resp['source']
     
-    await a.edit_text("**Title:** {}\n**Size:** {}\n**Duration:** {}\n**Resolution:** {}*{}\n**Uploader:** {}\n\n**Download Now:** {}".format(fn, humanbytes(sz), convert(dr), wt, ht, dn, download), disable_web_page_preview=True)
+    await a.edit_text("**ᴛɪᴛʟᴇ :** {}\n\n**sɪᴢᴇ :** {}\n\n**ᴅᴜʀᴀᴛɪᴏɴ :** {}\n\n**ʀᴇsᴏʟᴜᴛɪᴏɴ :** {}*{}\n\n**ᴜᴘʟᴏᴀᴅᴇʀ :** {}\n\n**💽 ᴅᴏᴡɴʟᴏᴀᴅ ɴᴏᴡ (sᴜᴘᴘᴏʀᴛ ᴏɴʟʏ ᴍx ᴘʟᴀʏᴇʀ) :** {}\n\n**🖥️ sᴏᴜʀᴄᴇ ᴅᴏᴡɴʟᴏᴀᴅ ᴜʀʟ (ɪғ ᴍxᴠ ᴘʀᴇsᴇɴᴛ ɪɴ ʟɪɴᴋ ᴛʜᴇɴ ɪᴛ sᴜᴘᴘᴏʀᴛ ᴏɴʟʏ ᴍx ᴘʟᴀʏᴇʀ  ɪғ ᴅᴀsʜ, ᴍᴘᴅ, ᴍ𝟹ᴜ𝟾, ʜʟs ᴘʀᴇsᴇɴᴛ ɪɴ ʟɪɴᴋ ᴛʜᴇɴ ɪᴛ sᴜᴘᴘᴏʀᴛ ᴀʟʟ ᴘʟᴀʏᴇʀ) :** {}".format(fn, humanbytes(sz), convert(dr), wt, ht, dn, download, source), disable_web_page_preview=True)
     
 
 
